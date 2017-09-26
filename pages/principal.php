@@ -45,13 +45,9 @@ if (!isset($_SESSION))
 
         <!-- Custom Fonts -->
         <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-
     </head>
 
     <body>
-
         <div id="wrapper">
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -65,23 +61,12 @@ if (!isset($_SESSION))
                     <a class="navbar-brand" href="principal.php">Valparts v1.0</a>
                 </div>
                 <!-- /.navbar-header -->
-
                 <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                            Bienvenido.: <?php echo @$_SESSION['usu_nome']; ?>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="../index.php"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-user -->
+                    <a class="navbar-brand" href="#">
+                        <i class="fa fa-user fa-fw"></i> 
+                        <?php echo @$_SESSION['usu_login']; ?>
+                    </a>
+                    <a class="navbar-brand" href="../index.php"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                     </li>
                     <!-- /.dropdown -->
                 </ul>
@@ -90,8 +75,7 @@ if (!isset($_SESSION))
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-<?php include '../view/menu.php'; ?>
-
+                            <?php include '../view/menu.php'; ?>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
@@ -111,7 +95,6 @@ if (!isset($_SESSION))
                 </div>
                 <!-- /.container-fluid -->
             </div>
-            <!-- /#page-wrapper -->
             <!-- /#page-wrapper -->
 
         </div>
