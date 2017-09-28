@@ -14,6 +14,7 @@ class cConexao {
     public $host = "192.168.0.11";
     public $user = "marcio";
     public $pass = "Semente@036";
+    
     public $db = "valparts";
     public $ultimoId;
     public $erro;
