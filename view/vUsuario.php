@@ -7,7 +7,7 @@ include '../controller/cUsuario.php';
 $c = new cUsuario;
 
 //route
-$action = $_REQUEST['action'];
+$action = $_REQUEST['funcao'];
 
 if (!isset($action)) {
     die();
