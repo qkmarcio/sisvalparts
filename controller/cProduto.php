@@ -24,7 +24,7 @@ Class cProduto {
             $cls->posicao = $obj->POSICAO;
             $cls->codigo = $obj->FABRICANTE;
             $cls->original = $obj->ORIGINAL;
-            $cls->descricaoBr = utf8_encode($obj->DESCRICAO);
+            $cls->descricao = utf8_encode($obj->DESCRICAO);
             $cls->descricaoPy = utf8_encode($obj->DESCR02);
             $cls->descricaoCa = utf8_encode($obj->APLICACAO);
             $cls->marca = utf8_encode($obj->DESCRMARCA);

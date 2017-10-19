@@ -1,37 +1,132 @@
-
-
-<div class="row">
-    <div class="col-lg-8">
-        <h1 class="page-header">Cadastro de Produtos</h1>
+<div class="row col-sm-7"><!-- Container -->
+    <div class="row"><!-- titulo -->
+        <h1 class="page-header">Lista de Productos</h1>
     </div>
-    <!-- /.col-lg-8 -->
-    <div class="col-lg-4">
-        <div style='float: left;'>
-            <input type="button" value="Exportar para Excel" id='excelExport' />
-            <input type="button" value="Exportar para PDF" id='pdfExport' />
+
+    <div class="row"><!-- menu -->
+        <div class="col-sm-8">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-whatever="Nuevo Producto" data-target="#ProdCadastro" data-backdrop="static" >Nuevo</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-whatever="Editar Producto" data-target="#ProdCadastro" data-backdrop="static" >Editar</button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-whatever="Vistar Producto" data-target="#ProdCadastro" data-backdrop="static" >Vista</button>
+            <button type="button" class="btn btn-danger" id='pdfExport' >Exp Pdf</button>
+            <button type="button" class="btn btn-danger" id='excelExport' >Exp Excel</button>
+        </div>
+        <div class="col-sm-4">
+            <input class="form-control" id="buscaProduto" type="text" placeholder="Busca Producto">
         </div>
     </div>
-    <!-- /.col-lg-4 -->
+
+    <div class="row" style="margin-top: 5px"> <!-- grid -->
+        <div class="col-sm-12">
+            <div id="listaProduto"></div>
+            <div id="historicoCompra"></div>
+        </div>
+    </div>
+
+    <!-- /Inicio modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="ProdCadastro" >
+        <div class="modal-dialog" role="document" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img id="pro_imagen" src="../Fotos/error.jpg" width="150" height="150"/>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="disabledSelect">Descripción</label>
+                                        <input class="form-control" id="pro_descricao" type="text" disabled>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="disabledSelect">Codigo</label>
+                                        <input class="form-control" id="pro_codigo" type="text" disabled>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="disabledSelect">Marca</label>
+                                        <input class="form-control" id="pro_marca" type="text" disabled>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Localización</label>
+                                        <input class="form-control" id="pro_posicao" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="Prod_sair" style="display: none;">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="Prod_salvar">Guardar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /Fim modal -->
 </div>
+
 <!-- /.row -->
 <div class="row">
-    <div class="col-lg-8">
-        <input type="text" id="buscaProduto" style="margin-right: 15px;float: left;text-transform: uppercase"/>
-        <div id="listaProduto"></div>
-        <div id="historicoCompra"></div>
-    </div>
-    <!-- /.col-lg-8 -->
+
+    <!-- /.col-lg-8 
     <div class="col-lg-4">
         <img id="imgProduto" style="margin-top: 8px" height="250" width="300" src="../Fotos/error.jpg"/>
     </div>
     <!-- /.col-lg-4 -->
+</div>   
 </div>
+
 <!-- /.row -->
 <script type="text/javascript">
+
+
+
     $(document).ready(function () {
+
+        $('#ProdCadastro').on('shown.bs.modal', function (event) {
+
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var recipient = button.data('whatever'); // Extract info from data-* attributes
+            console.info(event);
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this);
+            modal.find('.modal-title').text(recipient);
+            //modal.find('.modal-title').text(recipient);
+            //modal.find('.modal-body input').val(recipient);
+
+            var id = $("#listaProduto").jqxGrid('getselectedrowindex');
+            var row = $('#listaProduto').jqxGrid('getrowdata', id);
+            console.info(row);
+            if (row == undefined) {
+                alert('selecionar producto manuel');
+            } else {
+                $("#pro_descricao").val(row.descricao);
+                $("#pro_codigo").val(row.codigo);
+                $("#pro_marca").val(row.marca);
+                $("#pro_posicao").val(row.posicao);
+                $("#pro_imagen").attr('src');
+                img='../Fotos/'+id;
+            }
+
+        });
+
+        $('#pro_salvar').click(function () {
+            $('#ProdCadastro').modal('hide');
+        });
+
         $('#buscaProduto').focus();
-        $("#excelExport").jqxButton();
-        $("#pdfExport").jqxButton();
+        //$("#excelExport").jqxButton();
+        //$("#pdfExport").jqxButton();
         $("#excelExport").click(function () {
             $("#listaProduto").jqxGrid('exportData', 'xls', 'lista_Produto');
         });
@@ -39,17 +134,18 @@
             $("#listaProduto").jqxGrid('exportData', 'pdf');
         });
 
-$('#buscaProduto').keypress(function() {
-   // $(this).keypress()
- console.info($(this).val());;
-});
+        $('#buscaProduto').keypress(function () {
+            // $(this).keypress()
+            console.info($(this).val());
+            ;
+        });
 
-$('buscaProduto').keyup( function() {
-    //alert( $(this).find(":selected").val() );
-    console.info('teste');
-    
-    console.info($(this).val());
-});
+        $('buscaProduto').keypress(function () {
+            //alert( $(this).find(":selected").val() );
+            console.info('teste');
+
+            console.info($(this).val());
+        });
 
         $('#buscaProduto').on('keypress', function (e) {
             //console.info($('#buscaProduto').val());
@@ -64,13 +160,14 @@ $('buscaProduto').keyup( function() {
         document.querySelector('body').addEventListener('keydown', function (event) {
 
             var tecla = event.keyCode;
-            //console.info(tecla);
+            console.info(tecla);
 
             if (tecla == 13) {
 
                 // tecla ENTER
 
             } else if (tecla == 27) {
+                // tecla ESC
                 $("#buscaProduto").val('');
                 $('#buscaProduto').focus();
 
@@ -87,6 +184,7 @@ $('buscaProduto').keyup( function() {
                 // seta pra DIREITA
 
             } else if (tecla == 40) {
+                // seta pra BAIXO
                 var id = $("#listaProduto").jqxGrid('getselectedrowindex');
                 console.info(id);
                 if (id > 0) {

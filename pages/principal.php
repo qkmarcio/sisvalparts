@@ -62,7 +62,8 @@ if (!isset($_SESSION))
                 </div>
                 <!-- /.navbar-header -->
                 <ul class="nav navbar-top-links navbar-right">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="#" data-toggle="modal" data-whatever="Cambiar Usuario" data-target="#UsuarioModal" data-backdrop="static">
+                        <input hidden="hidden" id="usuarioID" value="<?php echo @$_SESSION['usu_id']; ?>" >
                         <i class="fa fa-user fa-fw"></i> 
                         <?php echo @$_SESSION['usu_login']; ?>
                     </a>
@@ -94,6 +95,51 @@ if (!isset($_SESSION))
                     <!-- /.row -->
                 </div>
                 <!-- /.container-fluid -->
+
+                <!-- /Inicio modal -->
+                <div id="login-alert" style="display: none" class="modal fade">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <span id="mensagem"></span>
+                </div> 
+                <div class="modal fade" tabindex="-1" role="dialog" id="UsuarioModal" >
+                    <div class="modal-dialog" role="document" >
+                        <div class="modal-content col-md-8">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <!--<label for="disabledSelect">Usuario</label>-->
+                                            <label >Usuario</label>
+                                            <input hidden="hidden" id="p_usu_id">
+                                            <input class="form-control" id="p_usu_nome" type="text" >
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label >Login</label>
+                                            <input class="form-control" id="p_usu_login" type="text" >
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Senha</label>
+                                            <input class="form-control" id="p_usu_senha" type="password">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="Usuario_novo" style="display: none;">Novo</button>
+                                <button type="button" class="btn btn-primary" id="Usuario_salvar">Guardar</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+                <!-- /Fim modal -->
             </div>
             <!-- /#page-wrapper -->
 
@@ -142,6 +188,26 @@ if (!isset($_SESSION))
 
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxdatetimeinput.js"></script>
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxcalendar.js"></script>
+        <script>
+
+            function loadjscssfile(filename, filetype) {
+                var fileref = null;
+                if (filetype == "js") { //if filename is a external JavaScript file
+                    fileref = document.createElement('script');
+                    fileref.setAttribute("type", "text/javascript");
+                    fileref.setAttribute("src", filename);
+                } else if (filetype == "css") { //if filename is an external CSS file
+                    fileref = document.createElement("link");
+                    fileref.setAttribute("rel", "stylesheet");
+                    fileref.setAttribute("type", "text/css");
+                    fileref.setAttribute("href", filename);
+                }
+                if (typeof fileref != "undefined") {
+                    document.getElementsByTagName("head")[0].appendChild(fileref);
+                }
+            }
+            loadjscssfile('../js/jUsuario.js?nocache=' + Math.random(), 'js');
+        </script>
 
     </body>
 

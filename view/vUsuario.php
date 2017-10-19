@@ -7,17 +7,12 @@ include '../controller/cUsuario.php';
 $c = new cUsuario;
 
 //route
-$action = $_REQUEST['funcao'];
-
-if (!isset($action)) {
-    die();
-} else {
-    $action();
-}
+$funcao = $_REQUEST['funcao'];                                              //RECEBE O NOME DA FUNÇÃO
+call_user_func($funcao);
 
 function logar() {
     $obj = (object) $_REQUEST['obj'];
-    
+
     $conColl = new cUsuario();
     $conArray = $conColl->getLogar($obj->usuario, md5($obj->senha));
 
@@ -32,7 +27,8 @@ function logar() {
         $_SESSION['usu_id'] = $resultado['usu_id'];
         $_SESSION['usu_login'] = $resultado['usu_login'];
         $_SESSION['usu_nome'] = $resultado['usu_nome'];
-        $_SESSION["conectado"]='sim';
+        $_SESSION['usu_status'] = $resultado['usu_status'];
+        $_SESSION["conectado"] = 'sim';
         $resultado["success"] = true;
     }
     //$retorno = array('codigo' => 1, 'mensagem' => 'Logado com sucesso!');
@@ -46,7 +42,6 @@ function insert() {
     $c->set("usu_nome", $obj->usu_nome);
     $c->set("usu_login", $obj->usu_login);
     $c->set("usu_senha", $obj->usu_senha);
-    $c->set("usu_status", $obj->usu_status);
 
     $insert = $c->incluir();
 
@@ -70,7 +65,6 @@ function update() {
     $c->set("usu_nome", $obj->usu_nome);
     $c->set("usu_login", $obj->usu_login);
     $c->set("usu_senha", $obj->usu_senha);
-    $c->set("usu_status", 'A');
 
     $update = $c->alterar();
 

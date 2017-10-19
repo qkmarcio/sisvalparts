@@ -36,13 +36,11 @@ class cUsuario {
         $sql = "INSERT INTO tab_usuario (
                 usu_nome,
                 usu_login,
-                usu_senha,
-                usu_status
+                usu_senha
                 )VALUES(";
         $sql .="'".strtoupper(addslashes($this->usu_nome))."',";
         $sql .="'".strtoupper(addslashes($this->usu_login))."',";
-        $sql .="'".md5($this->usu_senha)."',";
-        $sql .="'".strtoupper(addslashes($this->usu_status))."'";
+        $sql .="'".md5($this->usu_senha)."'";
         $sql .=")";
         
         $con->set("sql", $sql);
@@ -63,8 +61,7 @@ class cUsuario {
         $sql = "UPDATE tab_usuario SET ";
         $sql.="usu_nome ='" . strtoupper(addslashes($this->usu_nome)) . "',";
         $sql.="usu_login ='" . strtoupper(addslashes($this->usu_login)) . "',";
-        $sql.="usu_senha ='" . md5($this->usu_senha) . "',";
-        $sql.="usu_status ='" . strtoupper(addslashes($this->usu_status)) . "'";
+        $sql.="usu_senha ='" . md5($this->usu_senha) . "'";
         $sql .=" WHERE usu_id =" . $this->usu_id;
 
         $con->set("sql", $sql);
