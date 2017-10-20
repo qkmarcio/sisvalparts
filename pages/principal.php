@@ -185,6 +185,7 @@ if (!isset($_SESSION))
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxgrid.edit.js"></script> 
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxgrid.export.js"></script>
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxinput.js"></script>
+        <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxfileupload.js"></script>
 
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxdatetimeinput.js"></script>
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxcalendar.js"></script>
