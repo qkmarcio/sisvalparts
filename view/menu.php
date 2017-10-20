@@ -28,7 +28,7 @@ while ($menu = mysql_fetch_object($resultado_assuntos)) {
     
     //$linha_assunto_slug = url_slug($linha_assunto['nome_menu']);
 
-    $linha_sem_filho = "<li><a href=\"#\"><i class=\"$menu->menu_icov\"></i>\"$menu->nome_menu<span class=\"fa arrow\"></span></a>";
+    $linha_sem_filho = "<li><a href=\"#\"><i class=\"$menu->menu_ico\"></i>\"$menu->nome_menu<span class=\"fa arrow\"></span></a>";
 
     $sql2 = "SELECT * FROM tab_submenu WHERE menu_id = $menu->menu_id"
     . " AND SUBMENU_ID IN (SELECT SUBMENU_ID FROM TAB_SUBMENU_USUARIO WHERE USU_ID=$idusuario)";
@@ -42,7 +42,7 @@ while ($menu = mysql_fetch_object($resultado_assuntos)) {
     if ($fieldinfo->max_length > 0) {
 
         echo "<li>";
-        echo "<a href=\"#\"><i class=\"$menu->menu_icov\"></i>$menu->menu_nome<span class=\"fa arrow\"></span></a>";
+        echo "<a href=\"#\"><i class=\"$menu->menu_ico\"></i>$menu->menu_nome<span class=\"fa arrow\"></span></a>";
         echo "<ul class=\"nav nav-second-level\">";
 
         while ($submenu_nome = mysql_fetch_object($submenu)) {
