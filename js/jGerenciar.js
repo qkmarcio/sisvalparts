@@ -3,6 +3,23 @@
 var jGerenciar = {};
 
 jGerenciar.start = function () {
+    $("#excelExport,#excelExport1,#excelExport2").jqxButton();
+    $("#excelExport").click(function () {
+        $("#listaGerecial").jqxDataTable('exportData', 'xls');
+    });
+    $("#excelExport1").click(function () {
+        $("#listaVentaPorVendedor").jqxDataTable('exportData', 'xls');
+    });
+    $("#excelExport2").click(function () {
+        $("#listaVentaPorCliente").jqxDataTable('exportData', 'xls');
+    });
+    $("#vendaInicio,#clienteInicio").jqxDateTimeInput({width: 190, height: 25, selectionMode: 'range'});
+
+    var usuario = $("#usuarioID").val();
+    if (usuario == 3) { // verifica se o usuario tem permissao
+       
+        $("#gerencial01").hide();
+    }
     var date1 = new Date();
     var ano = date1.getFullYear();
     var mm = date1.getMonth();
@@ -22,29 +39,28 @@ jGerenciar.start = function () {
     jGerenciar.ListaVentaPorVendedor(date2.toISOString().substring(0, 8) + '01', jGerenciar.data());
     jGerenciar.ListaVentaPorCliente(date2.toISOString().substring(0, 8) + '01', jGerenciar.data());
 
+
+
 };
 
 $("#vendaInicio").on('change', function (event) {
     var selection = $("#vendaInicio").jqxDateTimeInput('getRange');
     if (selection.from !== null) {
         //console.info("<div>From: " + selection.from.toLocaleDateString() + " <br/>To: " + selection.to.toLocaleDateString() + "</div>");
-        //var data1 = jGerenciar.convertDatePortuguestoSql(selection.from.toLocaleDateString());
-       
-        var data1 = custom.convertDatePortuguestoSql(window.fromText);
-      
+        //var data1 = custom.convertDatePortuguestoSql(selection.from.toLocaleDateString());
+        var data1 = custom.convertDatePortuguestoSql(window.fromText)
         //var data2 = custom.convertDatePortuguestoSql(selection.to.toLocaleDateString());
         var data2 = custom.convertDatePortuguestoSql(window.toText);
 
         jGerenciar.ListaVentaPorVendedor(data1, data2);
-        
-        
+
     }
 });
 
 $("#clienteInicio").on('change', function (event) {
     var selection = $("#clienteInicio").jqxDateTimeInput('getRange');
     if (selection.from !== null) {
-       // console.info("<div>From: " + selection.from.toLocaleDateString() + " <br/>To: " + selection.to.toLocaleDateString() + "</div>");
+        //console.info("<div>From: " + selection.from.toLocaleDateString() + " <br/>To: " + selection.to.toLocaleDateString() + "</div>");
         //var data1 = custom.convertDatePortuguestoSql(selection.from.toLocaleDateString());
         var data1 = custom.convertDatePortuguestoSql(window.fromText);
         //var data2 = custom.convertDatePortuguestoSql(selection.to.toLocaleDateString());
@@ -109,7 +125,6 @@ jGerenciar.ListaGerencial = function () {
 };
 
 jGerenciar.ListaVentaPorVendedor = function (data1, data2) {
-    console.info(data1);
 
     var obj = new Object();
     obj.data = "'" + data1 + "' and '" + data2 + "'";
@@ -199,6 +214,4 @@ jGerenciar.ListaVentaPorCliente = function (data1, data2) {
         ]
     });
 };
-
-
 jGerenciar.start();
