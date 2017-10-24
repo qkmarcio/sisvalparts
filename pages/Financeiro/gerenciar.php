@@ -42,19 +42,19 @@
 </div>
 <!-- /.row -->
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#excelExport,#excelExport1,#excelExport2").jqxButton();
-        $("#excelExport").click(function () {
-            $("#listaGerecial").jqxDataTable('exportData', 'xls');
-        });
-        $("#excelExport1").click(function () {
-            $("#listaVentaPorVendedor").jqxDataTable('exportData', 'xls');
-        });
-        $("#excelExport2").click(function () {
-            $("#listaVentaPorCliente").jqxDataTable('exportData', 'xls');
-        });
-        $("#vendaInicio,#clienteInicio").jqxDateTimeInput({width: 190, height: 25, selectionMode: 'range'});
-    });
+//    $(document).ready(function () {
+////        $("#excelExport,#excelExport1,#excelExport2").jqxButton();
+////        $("#excelExport").click(function () {
+////            $("#listaGerecial").jqxDataTable('exportData', 'xls');
+////        });
+////        $("#excelExport1").click(function () {
+////            $("#listaVentaPorVendedor").jqxDataTable('exportData', 'xls');
+////        });
+////        $("#excelExport2").click(function () {
+////            $("#listaVentaPorCliente").jqxDataTable('exportData', 'xls');
+////        });
+////        $("#vendaInicio,#clienteInicio").jqxDateTimeInput({width: 190, height: 25, selectionMode: 'range'});
+//    });
     function loadjscssfile(filename, filetype) {
         var fileref = null;
         if (filetype == "js") { //if filename is a external JavaScript file
