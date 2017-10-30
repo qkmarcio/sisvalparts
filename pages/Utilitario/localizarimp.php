@@ -8,7 +8,6 @@
     </div>
     <div class="row" id="menu" style="display: none;"><!-- menu -->
         <div class="col-sm-8">
-            <button type="button" class="btn btn-danger" id='pdfExport' >Exp Pdf</button>
             <button type="button" class="btn btn-danger" id='excelExport' >Exp Excel</button>
         </div>
     </div>
@@ -50,7 +49,8 @@
                             {name: 'cod', type: 'string'},
                             {name: 'posicao', type: 'string'},
                             {name: 'marca', type: 'string'},
-                            {name: 'idcod', type: 'number'}
+                            {name: 'idcod', type: 'number'},
+                            {name: 'provedor', type: 'string'}
                         ],
                         datatype: "json"
                     };
@@ -62,14 +62,10 @@
                 rowsheight: 70,
                 source: dataAdapter,
                 columns: [
-                    {
-                        text: 'Image', datafield: 'idcod', width: 70, cellsrenderer: function (row, column, value) {
-                            return '<img src="../Fotos/' + value + '.jpg" width="70" height="70" />';
-                        }
-                    },
-                    {text: 'Qtd', datafield: 'qtd', width: 100},
                     {text: 'Codigo', datafield: 'cod', width: 100},
-                    {text: 'Local', datafield: 'posicao', width: 200},
+                    {text: 'Qtd', datafield: 'qtd', width: 100},
+                    {text: 'Lugar', datafield: 'posicao', width: 200},
+                    {text: 'Cod Provedor', datafield: 'provedor', width: 150},
                     {text: 'Marca', datafield: 'marca', width: 150}
 
                 ]
