@@ -7,7 +7,7 @@
 <!-- /.row -->
 <div class="row">
     <div class="col-lg-12">
-        <div id="gerencial01" class="col-lg-4">
+        <div id="gerencial01" class="col-lg-4" style="display: none">
             <div style='height: 30px;'>
                 <div style='float: left;margin-top: 5px;'>
                     <input type="button" value="Exp Excel" id='excelExport' />
@@ -71,7 +71,7 @@
             document.getElementsByTagName("head")[0].appendChild(fileref);
         }
     }
-    loadjscssfile('../js/custom_jquery.js?nocache=' + Math.random(), 'js');
+   // loadjscssfile('../js/custom_jquery.js?nocache=' + Math.random(), 'js');
     loadjscssfile('../js/jGerenciar.js?nocache=' + Math.random(), 'js');
 </script>
 

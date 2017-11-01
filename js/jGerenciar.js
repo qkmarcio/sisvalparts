@@ -17,8 +17,9 @@ jGerenciar.start = function () {
 
     var usuario = $("#usuarioID").val();
     if (usuario == 3) { // verifica se o usuario tem permissao
-       
         $("#gerencial01").hide();
+    } else {
+        $("#gerencial01").show();
     }
     var date1 = new Date();
     var ano = date1.getFullYear();
@@ -127,7 +128,7 @@ jGerenciar.ListaGerencial = function () {
 jGerenciar.ListaVentaPorVendedor = function (data1, data2) {
 
     var obj = new Object();
-    obj.data = "'" + data1 + "' and '" + data2 + "'";
+    obj.data = "'" + data1 + "' and '" + data2 + "' and vendedor not in(20,36)";
     obj.campo = "(SELECT f.nome FROM funcionario f WHERE v.vendedor=f.idfuncionario ) AS nome,\n\
                 v.vendedor as id,\n\
                 (SELECT SUM(c.subtotal)\n\

@@ -1,107 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-        <meta name="msapplication-tap-highlight" content="no" />
-        <title id='Description'>Responsive DataGrid - Mobile Example
-        </title>
-        <!--<link rel="stylesheet" href="jqwidgets-ver4.5.0/styles/demos/jqwidgets/styles/demo.css" type="text/css" /> !-->
+<?php
+// Test CVS
 
-        <link rel="stylesheet" href="jqwidgets-ver4.5.0/jqwidgets/styles/jqx.base.css" type="text/css" />
-        <link rel="stylesheet" href="jqwidgets-ver4.5.0/jqwidgets/styles/jqx.windowsphone.css" type="text/css" />
-        <link rel="stylesheet" href="jqwidgets-ver4.5.0/jqwidgets/styles/jqx.blackberry.css" type="text/css" />
-        <link rel="stylesheet" href="jqwidgets-ver4.5.0/jqwidgets/styles/jqx.mobile.css" type="text/css" />
-        <link rel="stylesheet" href="jqwidgets-ver4.5.0/jqwidgets/styles/jqx.android.css" type="text/css" />
+require_once './lib/phpExcelReader/Excel/reader.php';
 
 
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/scripts/jquery-1.11.1.min.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxcore.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxdata.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxbuttons.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxscrollbar.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxlistbox.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxdropdownlist.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxmenu.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxgrid.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxgrid.pager.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxgrid.selection.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxgrid.columnsresize.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/mobiledemos/simulator.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/jqwidgets/jqxpanel.js"></script>
-        <script type="text/javascript" src="jqwidgets-ver4.5.0/demos/jqxgrid/generatedata.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                // prepares the simulator. 
-                var theme = prepareSimulator("grid");
-                //var data = generatedata(500);
-                /* var source =
-                 {
-                 localdata: data,
-                 datatype: "array",
-                 datafields:
-                 [
-                 {name: 'name', type: 'string'},
-                 {name: 'firstname', type: 'string'},
-                 {name: 'lastname', type: 'string'},
-                 {name: 'productname', type: 'string'},
-                 {name: 'available', type: 'bool'},
-                 {name: 'quantity', type: 'number'},
-                 {name: 'price', type: 'number'},
-                 {name: 'date', type: 'date'}
-                 ]
-                 };*/
-                var obj = new Object();
-                obj.campo = "first 100 *";
-                obj.where = "where disponivel='S' and ativo='N' order by descricao";
-                var data = {'obj': obj, 'funcao': 'getListaProduto'};
-                var source = {
-                    type: "POST",
-                    datatype: "json",
-                    datafields: [
-                        {name: "idproduto"},
-                        {name: "codigo"},
-                        {name: "descricaoBr"},
-                        {name: "marca"},
-                        {name: "venda"},
-                        {name: "minimo"},
-                        {name: "custo"},
-                        {name: "estoque"},
-                        {name: "v6meses"},
-                        {name: "original"}
-
-                    ],
-                    id: 'id',
-                    url: 'view/vProduto.php',
-                    data: data
-                };
+// ExcelFile($filename, $encoding);
+$data = new Spreadsheet_Excel_Reader();
 
 
-                var dataAdapter = new $.jqx.dataAdapter(source);
-                $("#grid").jqxGrid(
-                        {
-                            width: '100%',
-                            height: '100%',
-                            source: dataAdapter,
-                            theme: theme,
-                            columnsresize: true,
-                            columnsheight: 40,
-                            rowsheight: 70,
-                            columns: [
-                                {text: 'Product', dataField: 'descricaoBr', width: '40%'},
-                                {text: 'Quantity', dataField: 'estoque', align: 'right', width: '30%', cellsalign: 'right'},
-                                {text: 'Unit Price', dataField: 'venda', align: 'right', width: '30%', cellsalign: 'right', cellsformat: 'c2'}
-                            ]
-                        });
-                initSimulator("grid");
-            });
-        </script>
-    </head>
-    <body class='default'>
-        <div id="demoContainer" class="device-mobile-tablet">
-            <div id="container" class="device-mobile-tablet-container">
-                <div style="border-left: none; border-bottom: none; border-right: none;" id='grid'>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+// Set output Encoding.
+$data->setOutputEncoding('CP1251');
+
+/***
+* if you want you can change 'iconv' to mb_convert_encoding:
+* $data->setUTFEncoder('mb');
+*
+**/
+
+/***
+* By default rows & cols indeces start with 1
+* For change initial index use:
+* $data->setRowColOffset(0);
+*
+**/
+
+
+
+/***
+*  Some function for formatting output.
+* $data->setDefaultFormat('%.2f');
+* setDefaultFormat - set format for columns with unknown formatting
+*
+* $data->setColumnFormat(4, '%.3f');
+* setColumnFormat - set format for column (apply only to number fields)
+*
+**/
+
+$data->read('jxlrwtest.xls');
+
+/*
+
+
+ $data->sheets[0]['numRows'] - count rows
+ $data->sheets[0]['numCols'] - count columns
+ $data->sheets[0]['cells'][$i][$j] - data from $i-row $j-column
+
+ $data->sheets[0]['cellsInfo'][$i][$j] - extended info about cell
+    
+    $data->sheets[0]['cellsInfo'][$i][$j]['type'] = "date" | "number" | "unknown"
+        if 'type' == "unknown" - use 'raw' value, because  cell contain value with format '0.00';
+    $data->sheets[0]['cellsInfo'][$i][$j]['raw'] = value if cell without format 
+    $data->sheets[0]['cellsInfo'][$i][$j]['colspan'] 
+    $data->sheets[0]['cellsInfo'][$i][$j]['rowspan'] 
+*/
+
+error_reporting(E_ALL ^ E_NOTICE);
+
+for ($i = 1; $i <= $data->sheets[0]['numRows']; $i++) {
+	for ($j = 1; $j <= $data->sheets[0]['numCols']; $j++) {
+		echo "\"".$data->sheets[0]['cells'][$i][$j]."\",";
+	}
+	echo "\n";
+
+}
+
+
+//print_r($data);
+//print_r($data->formatRecords);
+?>

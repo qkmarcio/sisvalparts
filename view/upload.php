@@ -22,10 +22,10 @@ if (!empty($_FILES['fileInput']['tmp_name'])) {
             
             $posicao = ( $o->posicao === null ? "Sem Lugar " : $o->posicao);
             $id = ( $o->idproduto===null ? "vazio" : $o->idproduto);
-            $qtd1 = ( $qtd===null ? "vazio" : $qtd);
-            $cod1 = ( $cod===null ? "vazio" : $cod);
-            $marca1 = ( $marca===null ? "vazio" : $marca);
-            $provedor1 = ( $provedor===null ? "vazio" : $provedor);
+            $qtd1 = ( $qtd==='vazio' ? "vazio" : $qtd);
+            $cod1 = ( $cod==='vazio' ? "Produto Novo" : $cod);
+            $marca1 = ( $marca==='vazio' ? "vazio" : $marca);
+            $provedor1 = ( $provedor==='vazio' ? "vazio" : $provedor);
             
             $cls->qtd = $qtd1;
             $cls->cod= $cod1;
