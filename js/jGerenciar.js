@@ -3,6 +3,14 @@
 var jGerenciar = {};
 
 jGerenciar.start = function () {
+
+    var usuario = $("#usuarioID").val();
+    if (usuario == 3) { // verifica se o usuario tem permissao
+        $("#gerencial01").hide();
+    } else {
+        $("#gerencial01").show();
+    }
+
     $("#excelExport,#excelExport1,#excelExport2").jqxButton();
     $("#excelExport").click(function () {
         $("#listaGerecial").jqxDataTable('exportData', 'xls');
@@ -15,18 +23,10 @@ jGerenciar.start = function () {
     });
     $("#vendaInicio,#clienteInicio").jqxDateTimeInput({width: 190, height: 25, selectionMode: 'range'});
 
-    var usuario = $("#usuarioID").val();
-    if (usuario == 3) { // verifica se o usuario tem permissao
-        $("#gerencial01").hide();
-    } else {
-        $("#gerencial01").show();
-    }
     var date1 = new Date();
     var ano = date1.getFullYear();
     var mm = date1.getMonth();
     date1.setFullYear(ano, mm, 1);
-
-
 
     var date2 = new Date();
     var ano2 = date2.getFullYear();
@@ -39,8 +39,6 @@ jGerenciar.start = function () {
     jGerenciar.ListaGerencial();
     jGerenciar.ListaVentaPorVendedor(date2.toISOString().substring(0, 8) + '01', jGerenciar.data());
     jGerenciar.ListaVentaPorCliente(date2.toISOString().substring(0, 8) + '01', jGerenciar.data());
-
-
 
 };
 
