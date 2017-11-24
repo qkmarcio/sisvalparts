@@ -167,6 +167,7 @@ if (!isset($_SESSION))
 
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxcore.js"></script>
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxbuttons.js"></script>
+        <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxradiobutton.js"></script>
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxscrollbar.js"></script>
 
         <script type="text/javascript" src="../jqwidgets-ver4.5.0/jqwidgets/jqxdata.js"></script>

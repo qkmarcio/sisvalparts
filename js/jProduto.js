@@ -1,10 +1,17 @@
 var produto = {};
+var usuario = $("#usuarioID").val();
 
 produto.start = function () {
     var obj = new Object();
     obj.campo = "first 100 *";
     obj.where = "where disponivel='S' and ativo='N' order by descricao";
     produto.lista(obj);
+
+
+    if (usuario == 5) { // verifica se o usuario tem permissao
+        $(".prodmenu1").hide();
+    }
+
 };
 
 produto.buscaProduto = function (value) {
@@ -139,12 +146,73 @@ produto.checkImagem = function (url) {
     });
 };
 
+produto.impEtiqueta = function () {
+    $("#ProdEtiqueta").dialog({
+        resizable: false,
+        title: 'Selecione Etiqueta',
+        width: 320, height: 100,
+        modal: false,
+        draggable: false,
+        dialogClass: "no-close",
+        closeOnEscape: false,
+        buttons: {
+            "Con Logo": function () {
+                $(this).dialog("close");
+            },
+            "Si Logo": function () {
+                $(this).dialog("close");
+            },
+            Cancela: function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+}
+$('#ProdEtiquetaLogo').click(function () {
+
+    var id = $("#listaProduto").jqxGrid('getselectedrowindex');
+    var row = $('#listaProduto').jqxGrid('getrowdata', id);
+
+    if (row == undefined) {
+        alert('selecionar producto na Grid!');
+    } else {
+        window.open("../Relatorios/EtiquetaMercadoria.php?id=" + row.idproduto + "&rel=1");
+    }
+});
+$('#ProdEtiquetaEuro').click(function () {
+
+    var id = $("#listaProduto").jqxGrid('getselectedrowindex');
+    var row = $('#listaProduto').jqxGrid('getrowdata', id);
+
+    if (row == undefined) {
+        alert('selecionar producto na Grid!');
+    } else {
+        window.open("../Relatorios/EtiquetaMercadoria.php?id=" + row.idproduto + "&rel=1");
+    }
+});
+
+$('#ProdEtiquetaVal').click(function () {
+
+    var id = $("#listaProduto").jqxGrid('getselectedrowindex');
+    var row = $('#listaProduto').jqxGrid('getrowdata', id);
+
+    if (row == undefined) {
+        alert('selecionar producto na Grid!');
+    } else {
+        window.open("../Relatorios/EtiquetaMercadoria.php?id=" + row.idproduto + "&rel=2");
+    }
+});
+
 $('#listaProduto').on('rowselect', function (event) {
     //console.info(event);
     var codigo = event.args.row.idproduto;
     $('#imgProduto').attr('src', '../Fotos/' + codigo + '.jpg');
     produto.checkImagem(codigo);
-    produto.historicoCompra(codigo);
+    if (usuario == 5) { // verifica se o usuario tem permissao
+        $(".prodmenu1").hide();
+    } else {
+        produto.historicoCompra(codigo);
+    }
 
 });
 

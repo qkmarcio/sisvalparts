@@ -1,3 +1,6 @@
+<style type="text/css">
+    .no-close .ui-dialog-titlebar-close {display: none }
+</style>
 <div class="row col-sm-7"><!-- Container -->
     <div class="row"><!-- titulo -->
         <h1 class="page-header">Lista de Productos</h1>
@@ -5,11 +8,14 @@
 
     <div class="row"><!-- menu -->
         <div class="col-sm-8">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-whatever="Nuevo Producto" data-target="#ProdCadastro" data-backdrop="static" >Nuevo</button>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-whatever="Editar Producto" data-target="#ProdCadastro" data-backdrop="static" >Editar</button>
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-whatever="Vistar Producto" data-target="#ProdCadastro" data-backdrop="static" >Vista</button>
-            <button type="button" class="btn btn-danger" id='pdfExport' >Exp Pdf</button>
+            <button type="button" class="btn btn-primary prodmenu1" data-toggle="modal" data-whatever="Nuevo Producto" data-target="#ProdCadastro" data-backdrop="static" >Nuevo</button>
+            <button type="button" class="btn btn-success prodmenu1" data-toggle="modal" data-whatever="Editar Producto" data-target="#ProdCadastro" data-backdrop="static" >Editar</button>
+            <button type="button" class="btn btn-warning prodmenu1" data-toggle="modal" data-whatever="Vistar Producto" data-target="#ProdCadastro" data-backdrop="static" >Vista</button>
+
             <button type="button" class="btn btn-danger" id='excelExport' >Exp Excel</button>
+            <button type="button" class="btn btn-primary" id="ProdEtiquetaVal" >Imp Valparts</button>
+            <button type="button" class="btn btn-danger" id="ProdEtiquetaEuro" >Imp Euro</button>
+            <!--            <button type="button" class="btn btn-danger" id='impEtiqueta' >Imprimir</button>-->
         </div>
         <div class="col-sm-4">
             <input class="form-control" id="buscaProduto" type="text" placeholder="Busca Producto">
@@ -22,7 +28,31 @@
             <div id="historicoCompra"></div>
         </div>
     </div>
+    <!--    <div class="modal fade" id="ProdEtiqueta" style="display: none" ></div>-->
+    <!-- /Inicio modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="ModProdEtiqueta" >
+        <div class="modal-dialog" role="document" style="width: 220px; height: 180px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div style='margin-top: 10px;' id='jqxRadioButton'>
+                            <span>Con Logo</span></div>
+                        <div style='margin-top: 10px;' id='jqxRadioButton1'>
+                            <span>Sin Logo</span></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="myReset" class="btn btn-default">Cerrar</a>
 
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /Fim modal -->
     <!-- /Inicio modal -->
     <div class="modal fade" tabindex="-1" role="dialog" id="ProdCadastro" >
         <div class="modal-dialog" role="document" >
@@ -59,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
 
                     </div>
@@ -92,11 +122,14 @@
 
     $(document).ready(function () {
 
+        $("#jqxRadioButton").jqxRadioButton({width: 250, height: 25});
+        $("#jqxRadioButton1").jqxRadioButton({width: 250, height: 25});
+
         $('#ProdCadastro').on('shown.bs.modal', function (event) {
 
             var button = $(event.relatedTarget); // Button that triggered the modal
             var recipient = button.data('whatever'); // Extract info from data-* attributes
-            console.info(event);
+
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this);
@@ -106,7 +139,7 @@
 
             var id = $("#listaProduto").jqxGrid('getselectedrowindex');
             var row = $('#listaProduto').jqxGrid('getrowdata', id);
-            console.info(row);
+
             if (row == undefined) {
                 alert('selecionar producto manuel');
             } else {
@@ -115,7 +148,7 @@
                 $("#pro_marca").val(row.marca);
                 $("#pro_posicao").val(row.posicao);
                 $("#pro_imagen").attr('src');
-                img='../Fotos/'+id;
+                img = '../Fotos/' + id;
             }
 
         });
