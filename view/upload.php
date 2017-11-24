@@ -26,6 +26,8 @@ if (!empty($_FILES['fileInput']['tmp_name'])) {
             $cod1 = ( $cod==='vazio' ? "Produto Novo" : $cod);
             $marca1 = ( $marca==='vazio' ? "vazio" : $marca);
             $provedor1 = ( $provedor==='vazio' ? "vazio" : $provedor);
+            $multiplo = ( $o->multiplo===null ? "1" : $o->multiplo);
+            $estoque = ( $o->estoque===null ? "0" : $o->estoque);
             
             $cls->qtd = $qtd1;
             $cls->cod= $cod1;
@@ -33,6 +35,8 @@ if (!empty($_FILES['fileInput']['tmp_name'])) {
             $cls->marca=$marca1;
             $cls->idcod=$id;
             $cls->provedor=$provedor1;
+            $cls->multiplo=$multiplo;
+            $cls->estoque=$estoque;
             $array[]= $cls;
         }
         $contLinha++;
@@ -42,7 +46,7 @@ if (!empty($_FILES['fileInput']['tmp_name'])) {
 
 function getPosicao($o) {
 
-    $query = "SELECT IDPRODUTO, POSICAO FROM PRODUTO WHERE FABRICANTE='$o'";
+    $query = "SELECT IDPRODUTO, POSICAO,VENDE_MULTIPLO_QTD,ESTOQUE_DEP_PRINC FROM PRODUTO WHERE FABRICANTE='$o'";
 
     $c = new cConexao();
     $con = $c->conFirebird();
@@ -52,6 +56,8 @@ function getPosicao($o) {
 
         $cls->posicao = $obj->POSICAO;
         $cls->idproduto = $obj->IDPRODUTO;
+        $cls->multiplo = $obj->VENDE_MULTIPLO_QTD;
+        $cls->estoque = $obj->ESTOQUE_DEP_PRINC;
     }
     return @$cls;
 }

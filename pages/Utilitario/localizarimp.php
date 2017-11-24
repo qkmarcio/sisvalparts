@@ -50,7 +50,9 @@
                             {name: 'posicao', type: 'string'},
                             {name: 'marca', type: 'string'},
                             {name: 'idcod', type: 'number'},
-                            {name: 'provedor', type: 'string'}
+                            {name: 'provedor', type: 'string'},
+                            {name: 'multiplo', type: 'number'},
+                            {name: 'estoque', type: 'number'}
                         ],
                         datatype: "json"
                     };
@@ -66,7 +68,9 @@
                     {text: 'Qtd', datafield: 'qtd', width: 100},
                     {text: 'Lugar', datafield: 'posicao', width: 200},
                     {text: 'Cod Provedor', datafield: 'provedor', width: 150},
-                    {text: 'Marca', datafield: 'marca', width: 150}
+                    {text: 'Marca', datafield: 'marca', width: 150},
+                    {text: 'Pacote', datafield: 'multiplo', width: 150},
+                    {text: 'Estoque', datafield: 'estoque', width: 150}
 
                 ]
             });
